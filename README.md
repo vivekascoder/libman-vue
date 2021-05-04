@@ -5,6 +5,13 @@
 - A PWA solution for managing library.
 - Using VueJS and 🔥 Firebase.
 
+## Demo
+<p align="center">
+  <img src="./src/assets/libman_1.gif">
+</p>
+<p align="center">
+  <img src="./src/assets/libman_2.gif">
+</p>
 ## Relationship.
 - Book
   - BookId
