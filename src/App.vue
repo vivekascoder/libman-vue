@@ -3,7 +3,10 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
-  <router-view/>
+  <navbar/>
+  <transition name="slide" mode="out-in">
+    <router-view/>
+  </transition>
   <div v-if="showLoader.value" class="fixed inset-0 bg-black bg-opacity-70 flex z-50 items-center justify-center">
     <Loader/>
   </div>
@@ -11,10 +14,12 @@
 
 <script>
 import Loader from '@/components/Loader'
+import Navbar from '@/components/Navbar'
 
 export default {
   components: {
-    Loader
+    Loader,
+    Navbar
   },
   data() {
     return {
@@ -41,5 +46,30 @@ export default {
 * {
   font-family: 'Oswald', sans-serif;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* *** TRANSITIONS *** */
+.slide-enter-active {
+  transition: all 500ms ease-in-out;
+}
+.slide-enter-from {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.slide-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-leave-from {
+  /* background: red; */
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+.slide-leave-active {
+  transition: all 500ms ease-in-out;
 }
 </style>

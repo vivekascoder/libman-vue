@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <navbar/>
+    <!-- <navbar/> -->
     <div class="grid grid-cols-2 gap-4 mx-4 mt-20">
       <router-link :to="{name: 'Books'}" class="bg-gradient-to-r from-green-400 to-blue-500 flex flex-col items-center justify-center rounded-lg p-4 text-white cursor-pointer">
         <span>
@@ -55,12 +55,10 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
 
 export default {
   name: 'Home',
   components: {
-    Navbar
   }
 }
 </script>

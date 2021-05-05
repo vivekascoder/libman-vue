@@ -1,18 +1,21 @@
 <template>
   <div class="min-h-screen">
-    <navbar/>
+    <!-- <navbar/> -->
     <div class="bg-gray-800 p-4 mx-4 mt-20">
       <TabsWrapper :tabs="['Login', 'Register']" :selected="selected" @selected="setSelected">
         <Tab :isSelected="selected==='Login'" class="tab">
-          <h1 class="form__heading">Login 🔐 Here</h1>
+          <div>
+            <h1 class="form__heading">Login 🔐 Here</h1>
           <form @submit.prevent="loginUser()">
             <input v-model="loginEmail" class="input__text" type="text" placeholder="example@mail.com">
             <input v-model="loginPassword" class="input__password" type="password" placeholder="********">
             <div v-if="loginError" class="px-4 py-2 bg-pink-600 bg-opacity-30 text-pink-700 tracking-wide">* {{loginError.message}}</div>
             <button class="block__btn">Login Now</button>
           </form>
+          </div>
         </Tab>
         <Tab :isSelected="selected==='Register'" class="tab">
+          <div>
           <h1 class="form__heading">Register 🧑 Now</h1>
           <form @submit.prevent="registerNewUser()">
             <input v-model="registerEmail" class="input__text" type="text" placeholder="example@mail.com" required>
@@ -20,16 +23,24 @@
             <div v-if="registerError" class="px-4 py-2 bg-pink-600 bg-opacity-30 text-pink-700 tracking-wide">* {{registerError.message}}</div>
             <button class="block__btn">Register</button>
           </form>
+          </div>
         </Tab>
       </TabsWrapper>
     </div>
+
+    <!-- <button @click="showMe=!showMe" class="px-4 py-2 bg-pink-50">Click Me</button>
+    <transition name="fade" >
+    <div v-if="showMe" class="bg-gray-400 w-96 p-4 m-4">
+      <p>Lorem, ipsum.</p>
+    </div>
+    </transition> -->
   </div>
 </template>
 
 <script>
 import TabsWrapper from '@/components/tab/TabsWrapper'
 import Tab from '@/components/tab/Tab'
-import Navbar from '../components/Navbar.vue'
+// import Navbar from '../components/Navbar.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -37,7 +48,6 @@ export default {
   components: {
     TabsWrapper,
     Tab,
-    Navbar
   },
   inject: ['showLoader'],
   data() {
@@ -49,6 +59,7 @@ export default {
       loginEmail: '',
       loginPassword: '',
       loginError: '',
+      showMe: false
     }
   },
   methods: {
@@ -67,6 +78,7 @@ export default {
           this.$router.push({name: 'Dashboard'})
           
         })
+        
         .catch( (error) => {
           this.registerError = error
           this.showLoader.value = false
@@ -106,4 +118,11 @@ export default {
 .block__btn {
   @apply w-full px-4 py-3 text-sm bg-pink-600 mt-6 hover:bg-pink-500 focus:outline-none;
 }
+/* .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+} */
 </style>

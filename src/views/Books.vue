@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <navbar />
+    <!-- <navbar /> -->
     <div id="books" class="mt-20 h-screen overflow-y-scroll" ref="books">
       <div
         v-for="book in books"
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue";
 import { db } from "@/services/firestore.js";
 import "firebase/firestore";
 import BookPulse from '@/components/BookPulse'
@@ -53,7 +52,6 @@ import BookPulse from '@/components/BookPulse'
 export default {
   name: "Home",
   components: {
-    Navbar,
     BookPulse,
   },
   inject: ["showLoader"],

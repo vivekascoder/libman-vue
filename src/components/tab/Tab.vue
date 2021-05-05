@@ -1,7 +1,9 @@
 <template>
-  <div v-if="isSelected">
-    <slot/>
-  </div>
+    <div>
+  <transition name="slidex" mode="out-in">
+      <slot  v-if="isSelected"/>
+  </transition>
+    </div>
 </template>
 
 <script>
@@ -14,6 +16,21 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.slidex-enter-from {
+  transform: translateX(100%);
+  /* opacity: 0; */
+}
+.slidex-enter-to {
+  transform: translateX(0);
+}
+.slidex-leave-from {
+  transform: translateX(0);
+}
+.slidex-leave-to {
+  transform: translateX(-100%);
+}
+.slidex-leave-active, .sliderx-enter-active {
+  transition: 300ms all ease;
+}
 </style>

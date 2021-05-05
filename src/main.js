@@ -8,6 +8,14 @@ import 'firebase/firestore'
 
 var firebaseApp = firebase.initializeApp(firebaseConfig)
 var db = firebase.firestore(firebaseApp)
-createApp(App).use(router).mount('#app')
+
+let app
+firebase.auth().onAuthStateChanged( user => {
+  if (!app) {
+    app = createApp(App)
+    app.use(router).mount('#app')
+  }
+})
+
 
 export {db}
