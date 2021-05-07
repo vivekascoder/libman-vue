@@ -27,7 +27,7 @@
 - [ ] Change the design of Navbar. (#navbar-layout)
 - [ ] Make a page to search the Books, 
 - [ ] Implement an image upload on Book add.
-- [ ] Implement the firebase database to store the image.
+- [x] Implement the firebase database to store the image.
 - [ ] Fix the navigation issue in Navbar component.
 - [ ] Implement a feature to make some books favorite.
 

@@ -4,6 +4,7 @@ import Auth from '@/views/Auth'
 import Books from '@/views/Books'
 import AddBook from '@/views/AddBook'
 import firebase from 'firebase/app'
+import ShowBook from '@/views/ShowBook'
 import 'firebase/auth'
 
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
     path: '/books',
     name: 'Books',
     component: Books
+  },
+  {
+    path: '/book/:id',
+    name: 'Book',
+    component: ShowBook
   },
   {
     path: '/books/add',

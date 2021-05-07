@@ -3,12 +3,13 @@ import {db} from '@/main.js'
 
 
 
-function createNewBook(name, author, price) {
+function createNewBook(name, author, price, imageUrl) {
   var newBook = db.collection("books").doc()
   return newBook.set({
     name: name,
     author: author,
-    price: parseInt(price)
+    price: parseInt(price),
+    imageUrl: imageUrl
   })
 }
 
