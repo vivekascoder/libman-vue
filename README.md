@@ -4,12 +4,31 @@
 - Using VueJS and 🔥 Firebase.
 
 ## Demo
-<p align="center">
-  <img src="./src/assets/libman_1.gif">
-</p>
-<p align="center">
-  <img src="./src/assets/libman_2.gif">
-</p>
+<div style="display: flex; align-items: center; justify-items: center;">
+  <div style="margin: 1rem;">
+    <img src="./src/assets/libman_1.gif">
+  </div>
+  <div style="margin: 1rem;">
+    <img src="./src/assets/libman_2.gif">
+  </div>
+  <div style="margin: 1rem;">
+    <img src="./src/assets/libman-upload.gif">
+  </div>
+</div>
+
+<div style="display: flex; align-items: center; justify-items: center;">
+  <div style="margin: 1rem;">
+    <img src="./src/assets/libman-chart.gif">
+  </div>
+  <div style="margin: 1rem;">
+    <img src="./src/assets/libman-category.gif">
+  </div>
+  <div style="margin: 1rem;">
+    <img src="./src/assets/libman-book.gif">
+  </div>
+</div>
+
+
 
 ## Relationship.
 - Book
