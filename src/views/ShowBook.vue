@@ -38,8 +38,19 @@
     >
       <h2 class="px-4">${{ book.price }}</h2>
     </div>
-    <div class="flex justify-center">
-      <button class="bg-purple-700 hover:bg-purple-800 text-white px-8 rounded-md py-2" @click="deleteBook(book.id)">Delete ❌</button>
+    <div class="flex justify-center space-x-4">
+      <button
+        class="bg-purple-700 hover:bg-purple-800 text-white px-8 rounded-md py-2"
+        @click="this.$router.push({name: 'UpdateBook', params: {id: book.id}})"
+      >
+        Update 🔄
+      </button>
+      <button
+        class="bg-purple-700 hover:bg-purple-800 text-white px-8 rounded-md py-2"
+        @click="deleteBook(book.id)"
+      >
+        Delete ❌
+      </button>
     </div>
   </div>
 </template>
@@ -53,34 +64,39 @@ export default {
       book: Object,
     };
   },
-  inject: ['showLoader'],
+  inject: ["showLoader"],
   methods: {
-    deleteBook(bookId) {
-      this.showLoader.value = true
-      db.collection("books")
-      .doc(bookId)
-      .delete()
-      .then(() => {
-        this.showLoader.value = false
-        this.$route.push('/books')
-      })
-      .catch((err) => console.error(err))
-    }
+    async deleteBook(bookId) {
+      this.showLoader.value = true;
+      try {
+        await db.collection("books").doc(bookId).delete();
+        this.showLoader.value = false;
+        this.$router.push({ name: "Books" });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
-  mounted() {
-    var id = this.$route.params.id;
-    db.collection("books")
-      .doc(id)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          this.book = doc.data();
-          console.log(doc.data());
-        } else {
-          console.error(`The book with id ${id} doesn't exists.`);
-        }
-      })
-      .catch((error) => console.error(`${id} :: ${error}`));
+  async mounted() {
+    try {
+      // Showing the loader while loading the data...
+      this.showLoader.value = true;
+
+      // Start fetching the data from firebase...
+      var id = this.$route.params.id;
+      const doc = await db.collection("books").doc(id).get();
+      if (doc.exists) {
+        this.book = {...doc.data(), id: doc.id};
+        console.log(doc.data());
+      } else {
+        console.error(`The book with id ${id} doesn't exists.`);
+      }
+
+      // Hiding the loader after loading the data...
+      this.showLoader.value = false;
+    } catch (err) {
+      console.error("ShowBook :: 80 :: ", err);
+    }
   },
 };
 </script>

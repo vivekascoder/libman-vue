@@ -1,4 +1,4 @@
-# Libman
+# 🚀 Libman
 
 - A PWA solution for managing library.
 - Using VueJS and 🔥 Firebase.
@@ -26,10 +26,12 @@
 - [ ] Fix the transition in Tab.
 - [ ] Change the design of Navbar. (#navbar-layout)
 - [ ] Make a page to search the Books, 
-- [ ] Implement an image upload on Book add.
+- [x] Implement an image upload on Book add.
 - [x] Implement the firebase database to store the image.
 - [ ] Fix the navigation issue in Navbar component.
 - [ ] Implement a feature to make some books favorite.
+- [x] Chart integration where we can see the traffic on the website.
+- [ ] Create a add category page.
 
 
 ## navbar layout

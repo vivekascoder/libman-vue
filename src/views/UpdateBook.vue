@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mx-4 bg-gray-800 p-4 mt-20">
-      <h1 class="form__heading">Add New 📗 Book</h1>
-      <form @submit.prevent="addNewBook()">
+      <h1 class="form__heading">Update 📗 Book</h1>
+      <form @submit.prevent="updateBook()">
         <input
           v-model="bookName"
           class="input__text"
@@ -24,20 +24,6 @@
           placeholder="23.32$"
           required
         />
-        <select 
-          class="input__text" 
-          v-model="bookCategory"
-          placeholder="Psychology"
-          required
-        >
-          <option 
-            :value="category.id"
-            v-for="category in categories"
-            :key="category.id"
-          > 
-            {{category.name}} 
-          </option>
-        </select>
         <input type="file" ref="file" class="hidden" accept="image/*" required/>
         <button type="button" class="upload_block__btn" @click="uploadImage()">
           <svg
@@ -79,7 +65,7 @@
         >
           * {{ loginError.message }}
         </div>
-        <button class="block__btn" @click="checkImage()">Add New Book</button>
+        <button class="block__btn" @click="checkImage()">Update 🔄 Book</button>
       </form>
     </div>
     <div
@@ -121,30 +107,26 @@ export default {
       showImageModal: false,
       showProgress: false,
       imageSource: "",
-      bookCategory: '',
       imageLocation: "",
-      categories: []
+      boook: Object
     };
   },
-  mounted() {
+  async mounted() {
     this.$refs.file.addEventListener("change", this.handleFileChange);
+    
+    const doc = await db.collection("books").doc(this.$route.params.id).get()
+    if (doc.exists) {
+      this.book = {...doc.data(), id: doc.id};
 
-    // Fetch the categories from the database and 
-    // populate the categories list.
-    db.collection('categories').orderBy('name').onSnapshot(
-      (querySnapshot) => {
-        let allCategories = []
-        querySnapshot.forEach((doc) => {
-          allCategories.push({
-            ...doc.data(),
-            id: doc.id
-          })
-        })
-        this.categories = allCategories
-        this.newCategoryName = ''
-      }
-    )
-    console.log(this.categories);
+      // Setting the variables.
+      this.bookName = this.book.name
+      this.bookAuthor = this.book.author
+      this.bookPrice = this.book.price
+      this.imageSource = this.book.imageUrl
+    } else {
+      console.error('Not data found.');
+    }
+
   },
   methods: {
     checkImage() {
@@ -228,16 +210,21 @@ export default {
         }
       );
     },
-    async addNewBook() {
+    async updateBook() {
       this.showLoader.value = true;
-      console.log(this.bookCategory);
       try{
-        await createNewBook(this.bookName, this.bookAuthor, this.bookPrice, this.imageSource)
+        await db.collection('books').doc(this.book.id).set({
+          name: this.bookName,
+          author: this.bookAuthor,
+          price: this.bookPrice,
+          imageUrl: this.imageSource
+        })
+        // await createNewBook(this.bookName, this.bookAuthor, this.bookPrice, this.imageSource)
 
         // Resetting all the values... :)
         this.showLoader.value = false;
         this.error = "";
-        this.displayMessage("New 📚️ Book Added Sucessfully.");
+        this.displayMessage("Book 📚️ Updated Sucessfully.");
         this.bookAuthor = "";
         this.bookName = "";
         this.bookPrice = "";

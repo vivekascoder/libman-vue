@@ -139,16 +139,18 @@ export default {
     hideMenuBar() {
       this.showNavMenu = false;
     },
-    logoutUser() {
-      this.showLoader.value = true;
-      // Logout the current User.
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.showLoader.value = false;
-        })
-        .catch((err) => console.log(err));
+    async logoutUser() {
+      try {
+        // Show the loader while log outting... :)
+        this.showLoader.value = true;
+        // Logout the current User.
+        await firebase.auth().signOut()
+      }
+      catch (err) {
+        console.error('Navbar :: ', err);
+      }
+      // Hiding the loader...
+      this.showLoader.value = false;
     },
   },
   created() {

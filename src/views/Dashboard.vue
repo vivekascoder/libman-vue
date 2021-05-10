@@ -18,14 +18,14 @@
         </span>
         <h1 class="text-2xl uppercase">Add Book</h1>
       </router-link>
-      <div class="bg-gradient-to-r from-purple-400 to-blue-500 flex flex-col items-center justify-center rounded-lg p-4 text-white cursor-pointer">
+      <router-link :to="{name: 'Category'}" class="bg-gradient-to-r from-purple-400 to-blue-500 flex flex-col items-center justify-center rounded-lg p-4 text-white cursor-pointer">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
           </svg>
         </span>
-        <h1 class="text-2xl uppercase">Search</h1>
-      </div>
+        <h1 class="text-2xl uppercase">Category</h1>
+      </router-link>
       <div class="bg-gradient-to-r from-green-400 to-blue-500 flex flex-col items-center justify-center rounded-lg p-4 text-white cursor-pointer">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,14 +42,14 @@
         </span>
         <h1 class="text-2xl uppercase">Issued</h1>
       </div>
-      <div class="bg-gradient-to-r from-purple-400 to-blue-500 flex flex-col items-center justify-center rounded-lg p-4 text-white cursor-pointer">
+      <router-link :to="{name: 'Analytics'}" class="bg-gradient-to-r from-purple-400 to-blue-500 flex flex-col items-center justify-center rounded-lg p-4 text-white cursor-pointer">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
         </span>
-        <h1 class="text-2xl uppercase">Update</h1>
-      </div>
+        <h1 class="text-2xl uppercase">Analytics</h1>
+      </router-link>
     </div>
   </div>
 </template>
@@ -62,3 +62,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.graph {
+  height: 200px;
+}
+</style>

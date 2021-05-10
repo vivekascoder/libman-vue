@@ -66,65 +66,50 @@ export default {
       lastElement: true
     };
   },
-  watch: {
-    books: () => {
-      console.log("Books: ", this.books.length) 
-    }
-  },
   methods: {
-    handleScroll(e) {
-      if (
-        this.$refs.books.clientHeight + this.$refs.books.scrollTop >=
-        this.$refs.books.scrollHeight && this.lastElement
-      ) {
-        this.showPulse = true
-        db.collection("books")
-          .orderBy("name")
-          .startAfter(this.lastElement)
-          .limit(10)
-          .get()
-          .then((querySnapshot) => {
-            if (querySnapshot.docs.length < 10) {
-              this.lastElement = null
-            }
-            querySnapshot.forEach((doc) => {
-              this.books.push({...doc.data(), id: doc.id})
-              this.lastElement = doc;
-              // console.log(doc.id)
-            });
-            this.showPulse = false;
-          })
-          .catch((err) => {
-            this.showPulse = false;
+    async handleScroll(e) {
+      let currentScrollegHeight = this.$refs.books.clientHeight + this.$refs.books.scrollTop;
+      let scrollHeight = this.$refs.books.scrollHeight;
+      this.showPulse = true
+
+      try {
+        if (currentScrollegHeight >= scrollHeight && this.lastElement) {
+          let querySnapshot = await db.collection("books").orderBy("name").startAfter(this.lastElement).limit(10).get()
+
+          if (querySnapshot.docs.length < 10) {
+            this.lastElement = null
+          }
+          querySnapshot.forEach((doc) => {
+            this.books.push({...doc.data(), id: doc.id})
+            this.lastElement = doc;
           });
+        }
       }
-    },
+      catch(err) {
+        console.error('Books :: ', err);
+      }
+      this.showPulse = false;
+    }
   },
   mounted() {
     this.$refs.books.addEventListener("scroll", this.handleScroll);
   },
-  unmounted() {
-    // this.$refs.books.removeEventListener("scroll", this.handleScroll)
-  },
-  created() {
+  async created() {
+    // Show the splash screen while loading...
     this.showPulse = true;
-    db.collection("books")
-      .orderBy("name")
-      .limit(10)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.books.push({...doc.data(), id: doc.id});
-          this.lastElement = doc;
-          // console.log(doc.data())
-        });
-        this.showPulse = false;
-        // console.log(querySnapshot.docs);
-        // console.log(this.lastElement);
-      })
-      .catch((err) => {
-        this.showPulse = false;
+
+    try {
+      const querySnapshot = await db.collection("books").orderBy("name").limit(10).get()
+      querySnapshot.forEach((doc) => {
+        this.books.push({...doc.data(), id: doc.id});
+        this.lastElement = doc;
       });
+    }
+    catch(err){
+      console.error(err);
+    }
+    // Hide the splash screen ...
+    this.showPulse = false;
   },
 };
 </script>
