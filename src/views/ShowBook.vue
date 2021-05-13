@@ -38,7 +38,8 @@
     >
       <h2 class="px-4">${{ book.price }}</h2>
     </div>
-    <div class="flex justify-center space-x-4">
+    <div>
+      <div class="flex justify-center space-x-4">
       <button
         class="bg-purple-700 hover:bg-purple-800 text-white px-8 rounded-md py-2"
         @click="this.$router.push({name: 'UpdateBook', params: {id: book.id}})"
@@ -51,6 +52,15 @@
       >
         Delete ❌
       </button>
+    </div>
+    <div class="flex justify-center mt-4" v-if="book.isAvailable">
+      <router-link
+        :to="{name: 'IssueBook', params: {id: book.id}}"
+        class="bg-purple-700 hover:bg-purple-800 text-white px-8 rounded-md py-2"
+      >
+        Issue For 💪 Me
+      </router-link>
+    </div>
     </div>
   </div>
 </template>

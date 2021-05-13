@@ -8,6 +8,8 @@ import ShowBook from '@/views/ShowBook'
 import UpdateBook from '@/views/UpdateBook'
 import Analytics from '@/views/Analytics'
 import Category from '@/views/Category'
+import IssueBook from '@/views/IssueBook'
+import Issued from '@/views/Issued'
 import 'firebase/auth'
 
 const routes = [
@@ -48,6 +50,16 @@ const routes = [
     path: '/book/update/:id',
     name: 'UpdateBook',
     component: UpdateBook
+  },
+  {
+    path: '/book/issue/:id',
+    name: 'IssueBook',
+    component: IssueBook
+  },
+  {
+    path: '/issued',
+    name: 'Issued',
+    component: Issued
   },
   {
     path: '/books/add',

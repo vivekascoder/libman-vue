@@ -9,7 +9,8 @@ function createNewBook(name, author, price, imageUrl) {
     name: name,
     author: author,
     price: parseInt(price),
-    imageUrl: imageUrl
+    imageUrl: imageUrl,
+    isAvailable: true
   })
 }
 
