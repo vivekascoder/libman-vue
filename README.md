@@ -63,11 +63,11 @@
 - [ ] Implement a feature to make some books favorite.
 - [x] Chart integration where we can see the traffic on the website.
 - [x] Create a add category page.
-- [ ] Add a page to show issued book in a table form.
-- [ ] Create a page to Issue a book by providin the no. of days.
-- [ ] Cost will be calculated according to the number of days.
-- [ ] Add a new field `isAvailable` is the book document.
-- [ ] Make `isAvailable` false by default.
+- [x] Add a page to show issued book in a table form.
+- [x] Create a page to Issue a book by providin the no. of days.
+- [x] Cost will be calculated according to the number of days.
+- [x] Add a new field `isAvailable` is the book document.
+- [x] Make `isAvailable` false by default.
 - **NOT CONFIRMED:**
   - Add VueX for state management.
 
